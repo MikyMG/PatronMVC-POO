@@ -9,6 +9,7 @@ export class ControladorEstudiante {
   ) {}
 
   registrarEstudiante(id: number, nombre: string, apellido: string, correo: string): void {
+    // Validar que los campos no estén vacíos
     const nuevoEstudiante = new Estudiante(id, nombre, apellido, correo);
     const agregado = this.modelo.agregar(nuevoEstudiante);
     if (agregado) {
@@ -19,11 +20,13 @@ export class ControladorEstudiante {
   }
 
   mostrarEstudiantes(): void {
+    // Obtener la lista de estudiantes y mostrarla
     const lista = this.modelo.obtenerTodos();
     this.vista.mostrarLista(lista);
   }
 
   buscarEstudiante(id: number): void {
+    // Buscar un estudiante por ID y mostrar sus detalles
     const estudiante = this.modelo.buscarPorId(id);
     if (estudiante) {
       this.vista.mostrarEstudiante(estudiante);
@@ -33,6 +36,7 @@ export class ControladorEstudiante {
   }
 
   eliminarEstudiante(id: number): void {
+    // Eliminar un estudiante por ID y mostrar el resultado
     const eliminado = this.modelo.eliminarPorId(id);
     if (eliminado) {
       this.vista.mostrarMensaje(`Estudiante con ID ${id} eliminado correctamente.`);
